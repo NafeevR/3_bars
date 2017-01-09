@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 
 
@@ -43,7 +44,7 @@ def get_closest_bar(data, longitude, latitude):
 
 
 if __name__ == '__main__':
-    bars_inf = load_data('data.json')
+    bars_inf = load_data('Бары.json')
     print('bigest bar is %s' % get_biggest_bar(bars_inf))
     print('smallest bar is %s' % get_smallest_bar(bars_inf))
     longitude = float(input('Input longitude(GPS) = '))
