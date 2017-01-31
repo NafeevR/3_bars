@@ -3,28 +3,17 @@ import json
 
 def load_data(filepath):
     date = []
-    with open(filepath, 'r', ) as file_dat:
-        date = json.load(file_dat)
+    date = json.load(open(filepath, 'r', ))
     return date
 
 
 def get_biggest_bar(data):
-    seats = data[0]['Cells']['SeatsCount']
-    the_biggest_bar = data[0]['Cells']['Name']
-    for all_bars in data:
-        if all_bars['Cells']['SeatsCount'] > seats:
-            seats = all_bars['Cells']['SeatsCount']
-            the_biggest_bar = all_bars['Cells']['Name']
+    the_biggest_bar = max(data,key=lambda i:i['Cells']['SeatsCount'])['Cells']['Name']
     return the_biggest_bar
 
 
 def get_smallest_bar(data):
-    seats = data[0]['Cells']['SeatsCount']
-    the_smallest_bar = data[0]['Cells']['Name']
-    for all_bars in data:
-        if all_bars['Cells']['SeatsCount'] < seats:
-            seats = all_bars['Cells']['SeatsCount']
-            the_smallest_bar = all_bars['Cells']['Name']
+    the_smallest_bar = min(data, key=lambda i: i['Cells']['SeatsCount'])['Cells']['Name']
     return the_smallest_bar
 
 
@@ -43,7 +32,8 @@ def get_closest_bar(data, longitude, latitude):
 
 
 if __name__ == '__main__':
-    bars_inf = load_data('Бары.json')
+    path_to_the_file = input('Input path to the file = ')
+    bars_inf = load_data(path_to_the_file)
     print('bigest bar is %s' % get_biggest_bar(bars_inf))
     print('smallest bar is %s' % get_smallest_bar(bars_inf))
     longitude = float(input('Input longitude(GPS) = '))
